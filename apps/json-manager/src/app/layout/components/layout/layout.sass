@@ -1,1 +1,13 @@
+// This layout allows to include full-height components in router outlet.
+// Use ":host" css selector as a flex item
+// See "home-page.sass"
+:host
+  display: flex
+  min-height: 100dvh
+  flex-direction: column
+  align-items: stretch
 
+  >:nth-child(2)
+    flex: 1
+    display: flex
+    position: relative
