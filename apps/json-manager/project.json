@@ -21,7 +21,7 @@
             "input": "apps/json-manager/public"
           }
         ],
-        "styles": ["apps/json-manager/src/styles.scss"]
+        "styles": ["apps/json-manager/src/styles.sass"]
       },
       "configurations": {
         "production": {
