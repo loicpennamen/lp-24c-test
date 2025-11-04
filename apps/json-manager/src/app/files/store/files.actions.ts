@@ -10,7 +10,13 @@ export const loadFilesFailure = createAction(
   '[Files] Load Files Failure',
   props<{ error: any }>()
 );
-
+export const resetFiles = createAction(
+  '[Files] Reset the demonstration files list'
+);
+export const resetFilesSuccess = createAction(
+  '[Files] Load Files success',
+  props<{ files: JsonFile[] }>()
+);
 export const createFile = createAction(
   '[Files] Create a JSON file',
   props<JsonFile>()

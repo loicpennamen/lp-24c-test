@@ -15,6 +15,10 @@ export class FilesFacade {
     this.store.dispatch(FilesActions.loadFiles());
   }
 
+  resetFiles() {
+    this.store.dispatch(FilesActions.resetFiles());
+  }
+
   createFile(file: JsonFile) {
     this.store.dispatch(FilesActions.createFile(file));
   }

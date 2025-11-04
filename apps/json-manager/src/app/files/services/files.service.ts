@@ -33,7 +33,14 @@ export class FilesService {
     });
   }
 
-  saveFiles(): Observable<void> {
+  public reset(): Observable<JsonFile[]> {
+    return new Observable((observer) => {
+      observer.next(this.getDummyFiles());
+      observer.complete();
+    });
+  }
+
+  public saveFiles(): Observable<void> {
     return this.store.select(selectAllFiles).pipe(
       take(1),
       tap((files) => {

@@ -39,4 +39,8 @@ export class FilesList {
     });
     modalRef.componentInstance.file = file;
   }
+
+  protected resetList() {
+    this.filesFacade.resetFiles();
+  }
 }

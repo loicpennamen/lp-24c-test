@@ -22,6 +22,19 @@ export class FilesEffects {
     )
   );
 
+  // Reset files
+  resetFiles$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(FilesActions.resetFiles),
+      mergeMap(() =>
+        this.filesService.reset().pipe(
+          map((files) => FilesActions.resetFilesSuccess({ files: files })),
+          catchError((error) => of(FilesActions.loadFilesFailure({ error })))
+        )
+      )
+    )
+  );
+
   // On file created
   createFile$ = createEffect(
     () =>
