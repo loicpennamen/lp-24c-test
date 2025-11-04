@@ -8,6 +8,7 @@ export default [
   {
     files: ['**/*.ts'],
     rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
       '@angular-eslint/directive-selector': [
         'error',
         {

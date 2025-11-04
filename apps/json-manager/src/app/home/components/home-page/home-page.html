@@ -5,7 +5,9 @@
       <h1 class="card-title">Welcome!</h1>
       <div class="card-text my-4">
         Upload JSON files in a quick and efficient way.
-        <div class="text-primary">TODO : COUNTER</div>
+        <div class="text-primary">
+          {{ filesCount() | i18nPlural:{'=0': 'No files were uploaded yet', '=1': 'file uploaded already', 'other': '# files uploaded already'} }}
+        </div>
       </div>
       <a href="#" class="btn btn-primary">Upload file</a>
     </div>
