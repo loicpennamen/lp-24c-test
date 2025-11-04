@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import * as FilesActions from './files.actions';
 import { FilesService } from '../services/files.service';
 import { catchError, map, mergeMap, of } from 'rxjs';
@@ -18,6 +18,14 @@ export class FilesEffects {
           catchError((error) => of(FilesActions.loadFilesFailure({ error })))
         )
       )
+    )
+  );
+
+  crateFile$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(FilesActions.createFile),
+      map((file) => FilesActions.createFileSuccess(file)),
+      catchError((error) => of(FilesActions.createFileFailure({ error })))
     )
   );
 }

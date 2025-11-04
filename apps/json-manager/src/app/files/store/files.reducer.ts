@@ -1,7 +1,14 @@
 import { createReducer, on } from '@ngrx/store';
 import { JsonFile } from '../models/json-file';
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
-import { loadFiles, loadFilesFailure, loadFilesSuccess } from './files.actions';
+import {
+  createFile,
+  createFileFailure,
+  createFileSuccess,
+  loadFiles,
+  loadFilesFailure,
+  loadFilesSuccess,
+} from './files.actions';
 
 export interface FilesCollectionState extends EntityState<JsonFile> {
   loading: boolean;
@@ -21,16 +28,33 @@ export const initialState: FilesCollectionState = adapter.getInitialState({
 
 export const filesReducer = createReducer(
   initialState,
+  // load
   on(loadFiles, (state) => ({ ...state, loading: true, error: null })),
   on(loadFilesSuccess, (state, { files }) =>
-    adapter.setAll(files, { ...state, loading: false })
+    adapter.setAll(files, {
+      ...state,
+      loading: false,
+      error: null,
+      count: files.length,
+    })
   ),
   on(loadFilesFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+    count: -1,
+  })),
+
+  // create
+  on(createFile, (state) => ({ ...state, loading: true, error: null })),
+  on(createFileSuccess, (state, { file }) =>
+    adapter.addOne(file, { ...state, loading: false })
+  ),
+  on(createFileFailure, (state, { error }) => ({
     ...state,
     loading: false,
     error,
   }))
 );
 
-export const { selectAll, selectEntities, selectIds, selectTotal } =
-  adapter.getSelectors();
+export const { selectAll } = adapter.getSelectors();

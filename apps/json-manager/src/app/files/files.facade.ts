@@ -14,4 +14,8 @@ export class FilesFacade {
   loadFiles() {
     this.store.dispatch(FilesActions.loadFiles());
   }
+
+  addFile(file: JsonFile) {
+    this.store.dispatch(FilesActions.createFile({ file }));
+  }
 }
