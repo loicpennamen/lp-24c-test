@@ -15,7 +15,11 @@ export class FilesFacade {
     this.store.dispatch(FilesActions.loadFiles());
   }
 
-  addFile(file: JsonFile) {
-    this.store.dispatch(FilesActions.createFile({ file }));
+  createFile(file: JsonFile) {
+    this.store.dispatch(FilesActions.createFile(file));
+  }
+
+  deleteFile(file: JsonFile) {
+    this.store.dispatch(FilesActions.deleteFile(file));
   }
 }

@@ -62,7 +62,7 @@ export class FileUploadModal {
       return;
     }
     // Add to list
-    this.filesFacade.addFile({
+    this.filesFacade.createFile({
       id: Date.now(), // for demo purposes
       name: this.form.get('title')?.value,
       description: this.form.get('description')?.value,

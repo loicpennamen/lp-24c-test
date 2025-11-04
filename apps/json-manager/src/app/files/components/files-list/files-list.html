@@ -2,13 +2,12 @@
 
   <div class="d-flex justify-content-between align-items-center">
     <div class="col-auto text-lg">
-      {{ filesCount() | i18nPlural:{ '=0': 'No files yet', '=1': 'file', 'other': '# files' } }}
+      {{ filesCount() | i18nPlural:{ '=0': 'No files yet', '=1': '1 file', 'other': '# files' } }}
     </div>
     <div class="col-auto">
       <button class="btn btn-primary" (click)="uploadFile()">Upload file</button>
     </div>
   </div>
-
 
   <table class="table table-lg my-4">
     <thead class="table-light border-top border-bottom">

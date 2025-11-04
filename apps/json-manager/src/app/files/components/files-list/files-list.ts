@@ -4,6 +4,7 @@ import { FilesFacade } from '../../files.facade';
 import { FileUploadModal } from '../file-upload-modal/file-upload-modal';
 import { NgbModal, NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 import { JsonFile } from '../../models/json-file';
+import { FileDeleteModal } from '../file-delete-modal/file-delete-modal';
 
 @Component({
   selector: 'app-files-list',
@@ -31,5 +32,11 @@ export class FilesList {
     });
   }
 
-  protected deleteFile(file: JsonFile) {}
+  protected deleteFile(file: JsonFile) {
+    const modalRef = this.modalService.open(FileDeleteModal, {
+      backdrop: 'static',
+      centered: true,
+    });
+    modalRef.componentInstance.file = file;
+  }
 }
