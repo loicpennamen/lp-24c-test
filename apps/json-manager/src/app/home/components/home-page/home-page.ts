@@ -22,7 +22,7 @@ export class HomePageComponent {
   }
 
   protected uploadFile() {
-    const modalRef = this.modalService.open(FileUploadModal, {
+    this.modalService.open(FileUploadModal, {
       backdrop: 'static',
       centered: true,
     });

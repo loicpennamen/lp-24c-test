@@ -1,14 +1,15 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { JsonFile } from '../models/json-file';
-import { Observable } from 'rxjs';
+import { map, mapTo, Observable, take, tap } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { selectAllFiles } from '../store/files.selectors';
 
 @Injectable({ providedIn: 'root' })
 export class FilesService {
   private localStorageJsonFilesKey = 'json_files';
+  private store = inject(Store);
 
-  /**
-   * Using an observable to simulate an API call, loading locally.
-   */
+  // Using observables to simulate an API call, loading locally.
   public getAllFiles(): Observable<JsonFile[]> {
     return new Observable((observer) => {
       let files = [];
@@ -26,14 +27,25 @@ export class FilesService {
           files = this.getDummyFiles();
         }
       }
-      this.saveFiles(files);
+
       observer.next(files);
       observer.complete();
     });
   }
 
-  private saveFiles(files: JsonFile[]) {
-    localStorage.setItem(this.localStorageJsonFilesKey, JSON.stringify(files));
+  saveFiles(): Observable<void> {
+    return this.store.select(selectAllFiles).pipe(
+      take(1),
+      tap((files) => {
+        localStorage.setItem(
+          this.localStorageJsonFilesKey,
+          JSON.stringify(files)
+        );
+      }),
+      map(() => {
+        return;
+      })
+    );
   }
 
   private getDummyFiles(): JsonFile[] {

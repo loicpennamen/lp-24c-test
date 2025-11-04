@@ -1,9 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
+import { I18nPluralPipe } from '@angular/common';
+import { FilesFacade } from '../../files.facade';
+import { FileUploadModal } from '../file-upload-modal/file-upload-modal';
+import { NgbModal, NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
+import { JsonFile } from '../../models/json-file';
 
 @Component({
   selector: 'app-files-list',
-  imports: [],
+  imports: [I18nPluralPipe, NgbTooltip],
   templateUrl: './files-list.html',
   styleUrl: './files-list.sass',
 })
-export class FilesList {}
+export class FilesList {
+  private filesFacade = inject(FilesFacade);
+  private modalService = inject(NgbModal);
+  protected filesCount = signal(0);
+  protected files: WritableSignal<JsonFile[]> = signal([]);
+
+  constructor() {
+    this.filesFacade.files$.subscribe((files) => {
+      this.filesCount.set(files.length);
+      this.files.set(files.reverse());
+    });
+  }
+
+  protected uploadFile() {
+    this.modalService.open(FileUploadModal, {
+      backdrop: 'static',
+      centered: true,
+    });
+  }
+
+  protected deleteFile(file: JsonFile) {}
+}

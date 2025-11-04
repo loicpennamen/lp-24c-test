@@ -13,7 +13,7 @@ export const loadFilesFailure = createAction(
 
 export const createFile = createAction(
   '[Files] Create a JSON file',
-  props<{ file: JsonFile }>() // on passe le fichier directement ici
+  props<{ file: JsonFile }>()
 );
 export const createFileSuccess = createAction(
   '[Files] Create File Success',
