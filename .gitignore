@@ -52,3 +52,5 @@ utils
 
 vite.config.*.timestamp*
 vitest.config.*.timestamp*
+
+.firebase/
