@@ -5,7 +5,7 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { JsonFile } from '../../models/json-file';
+import type { JsonFile } from '../../models/json-file';
 import { NgbModal, NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 import { FileDeleteModal } from '../file-delete-modal/file-delete-modal';
 

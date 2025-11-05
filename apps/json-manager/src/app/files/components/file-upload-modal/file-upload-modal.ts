@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 import { jsonFileExtensionValidator } from '../../../forms/validators/json-file-validator';
 import { MustContainStringValidator } from '../../../forms/validators/must-contain-string-validator';
 import { MustNotContainStringValidator } from '../../../forms/validators/must-not-contain-string-validator';
+import { FilesService } from '../../services/files.service';
+import { InvalidJsonError } from '../../dto/InvalidJsonError';
 
 @Component({
   selector: 'app-file-upload-modal',
@@ -22,6 +24,7 @@ import { MustNotContainStringValidator } from '../../../forms/validators/must-no
 export class FileUploadModal {
   private fb = inject(FormBuilder);
   private filesFacade = inject(FilesFacade);
+  private filesService = inject(FilesService);
   private router = inject(Router);
   protected form: FormGroup;
   protected activeModal = inject(NgbActiveModal);
@@ -69,11 +72,15 @@ export class FileUploadModal {
     const reader = new FileReader();
     reader.onload = () => {
       try {
-        JSON.parse(reader.result as string);
-      } catch (e) {
-        this.invalidJsonMessage.set(
-          'This file contains invalid JSON. You can still upload it.'
-        );
+        this.filesService.checkJsonString(reader.result as string);
+      } catch (err) {
+        if (err instanceof InvalidJsonError) {
+          this.invalidJsonMessage.set(
+            'This file contains invalid JSON. You can still upload it.'
+          );
+        } else {
+          throw err;
+        }
       }
     };
     reader.readAsText(file);

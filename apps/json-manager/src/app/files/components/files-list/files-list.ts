@@ -3,7 +3,7 @@ import { I18nPluralPipe } from '@angular/common';
 import { FilesFacade } from '../../files.facade';
 import { FileUploadModal } from '../file-upload-modal/file-upload-modal';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { JsonFile } from '../../models/json-file';
+import type { JsonFile } from '../../models/json-file';
 import { FilesListItem } from '../files-list-item/files-list-item';
 
 @Component({

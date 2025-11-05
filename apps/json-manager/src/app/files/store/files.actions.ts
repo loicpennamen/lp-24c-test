@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { JsonFile } from '../models/json-file';
+import type { JsonFile } from '../models/json-file';
 
 export const loadFiles = createAction('[Files] Load Files');
 export const loadFilesSuccess = createAction(

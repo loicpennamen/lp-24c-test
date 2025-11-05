@@ -1,6 +1,6 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JsonFile } from '../../models/json-file';
+import type { JsonFile } from '../../models/json-file';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FilesFacade } from '../../files.facade';
 import { Router } from '@angular/router';

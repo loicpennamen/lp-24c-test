@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
-import { JsonFile } from '../models/json-file';
-import { map, mapTo, Observable, take, tap } from 'rxjs';
+import type { JsonFile } from '../models/json-file';
+import { map, Observable, take, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { selectAllFiles } from '../store/files.selectors';
+import { InvalidJsonError } from '../dto/InvalidJsonError';
 
 @Injectable({ providedIn: 'root' })
 export class FilesService {
@@ -93,5 +94,14 @@ export class FilesService {
         name: 'Schema7751',
       },
     ];
+  }
+
+  public checkJsonString(json: string): boolean {
+    try {
+      JSON.parse(json);
+    } catch (e) {
+      throw new InvalidJsonError('Invalid JSON', json);
+    }
+    return true;
   }
 }

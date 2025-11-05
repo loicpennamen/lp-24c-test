@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { selectAll } from './files.reducer';
 import { EntityState } from '@ngrx/entity';
-import { JsonFile } from '../models/json-file';
+import type { JsonFile } from '../models/json-file';
 
 const selectFilesFeature =
   createFeatureSelector<EntityState<JsonFile>>('files');

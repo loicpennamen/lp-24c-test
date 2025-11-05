@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as FilesActions from './store/files.actions';
 import { Observable } from 'rxjs';
-import { JsonFile } from './models/json-file';
+import type { JsonFile } from './models/json-file';
 import { selectAllFiles } from './store/files.selectors';
 
 @Injectable({ providedIn: 'root' })

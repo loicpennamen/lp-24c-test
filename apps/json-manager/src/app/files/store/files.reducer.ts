@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { JsonFile } from '../models/json-file';
+import type { JsonFile } from '../models/json-file';
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import {
   createFile,
