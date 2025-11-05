@@ -35,6 +35,24 @@ export class FilesEffects {
     )
   );
 
+  // On reset
+  resetFilesSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(FilesActions.resetFilesSuccess),
+        mergeMap(() =>
+          // Save files list
+          this.filesService.saveFiles().pipe(
+            catchError((error) => {
+              console.error('Error when saving files', error);
+              return EMPTY;
+            })
+          )
+        )
+      ),
+    { dispatch: false }
+  );
+
   // On file created
   createFile$ = createEffect(
     () =>

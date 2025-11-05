@@ -21,23 +21,7 @@
     </thead>
     <tbody>
       @for (file of files(); track file.id) {
-        <tr [class.table-warning]="!file.isValid">
-          <td><img src="/svg/code-file.svg" alt="File" /> {{ file.filename }}</td>
-          <td>{{ file.name }}</td>
-          <td>{{ file.description }}</td>
-          <td>
-            @if (file.isValid) {
-              <span class="badge text-bg-success">Valid</span>
-            } @else {
-              <span class="badge text-bg-danger">Not valid</span>
-            }
-          </td>
-          <td>
-            <a href="javascript:void(0)" (click)="deleteFile(file)" ngbTooltip="Delete">
-              <img src="/svg/icon-remove.svg" alt="Delete">
-            </a>
-          </td>
-        </tr>
+        <tr app-files-list-item [file]="file" [class.table-warning]="!file.isValid"></tr>
       }
     </tbody>
   </table>

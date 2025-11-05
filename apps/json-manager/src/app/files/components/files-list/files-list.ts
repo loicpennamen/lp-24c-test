@@ -2,13 +2,13 @@ import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { I18nPluralPipe } from '@angular/common';
 import { FilesFacade } from '../../files.facade';
 import { FileUploadModal } from '../file-upload-modal/file-upload-modal';
-import { NgbModal, NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { JsonFile } from '../../models/json-file';
-import { FileDeleteModal } from '../file-delete-modal/file-delete-modal';
+import { FilesListItem } from '../files-list-item/files-list-item';
 
 @Component({
   selector: 'app-files-list',
-  imports: [I18nPluralPipe, NgbTooltip],
+  imports: [I18nPluralPipe, FilesListItem],
   templateUrl: './files-list.html',
   styleUrl: './files-list.sass',
 })
@@ -30,14 +30,6 @@ export class FilesList {
       backdrop: 'static',
       centered: true,
     });
-  }
-
-  protected deleteFile(file: JsonFile) {
-    const modalRef = this.modalService.open(FileDeleteModal, {
-      backdrop: 'static',
-      centered: true,
-    });
-    modalRef.componentInstance.file = file;
   }
 
   protected resetList() {
