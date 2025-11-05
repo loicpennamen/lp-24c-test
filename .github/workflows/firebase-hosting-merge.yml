@@ -18,10 +18,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Build Nx Angular app (json-manager)
+        run: npx nx build json-manager --configuration=production
+
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_C_TEST_B86FB }}'
           projectId: 'c-test-b86fb'
-          FIREBASE_FRAMEWORKS_BUILD_TARGET: 'json-manager:build:production'

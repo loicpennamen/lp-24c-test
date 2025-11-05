@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "source": ".",
+    "public": "dist/apps/json-manager/browser",
     "ignore": [
       "firebase.json",
       "**/.*",

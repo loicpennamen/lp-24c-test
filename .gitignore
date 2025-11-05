@@ -54,3 +54,5 @@ vite.config.*.timestamp*
 vitest.config.*.timestamp*
 
 .firebase/
+
+firebase-debug.log
