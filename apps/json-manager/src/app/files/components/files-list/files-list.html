@@ -1,32 +1,39 @@
 <div class="my-2 mx-3">
-
   <div class="d-flex justify-content-between align-items-center">
     <div class="col-auto text-lg">
-      {{ filesCount() | i18nPlural:{ '=0': 'No files yet', '=1': '1 file', 'other': '# files' } }}
+      {{ filesCount() | i18nPlural:{ '=0': 'No files yet', '=1': '1 file',
+      'other': '# files' } }}
     </div>
     <div class="col-auto">
-      <button class="btn btn-primary" (click)="uploadFile()">Upload file</button>
+      <button class="btn btn-primary" (click)="uploadFile()">
+        Upload file
+      </button>
     </div>
   </div>
 
   <table class="table table-lg my-4">
     <thead class="table-light border-top border-bottom">
-    <tr>
-      <th>File</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Valid</th>
-      <th></th>
-    </tr>
+      <tr>
+        <th>File</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Valid</th>
+        <th></th>
+      </tr>
     </thead>
     <tbody>
       @for (file of files(); track file.id) {
-        <tr app-files-list-item [file]="file" [class.table-warning]="!file.isValid"></tr>
+      <tr
+        app-files-list-item
+        [file]="file"
+        [class.table-warning]="!file.isValid"
+      ></tr>
       }
     </tbody>
   </table>
 
   <!--Demo-->
-  <button class="btn btn-sm btn-outline-secondary " (click)="resetList()">Reset test files list</button>
-
+  <button class="btn btn-sm btn-outline-secondary" (click)="resetList()">
+    Reset test files list
+  </button>
 </div>

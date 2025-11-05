@@ -6,11 +6,14 @@
       <div class="card-text my-4">
         Upload JSON files in a quick and efficient way.
         <div class="text-primary">
-          {{ filesCount() | i18nPlural:{'=0': 'No files were uploaded yet', '=1': '1 file uploaded already', 'other': '# files uploaded already'} }}
+          {{ filesCount() | i18nPlural:{'=0': 'No files were uploaded yet',
+          '=1': '1 file uploaded already', 'other': '# files uploaded already'}
+          }}
         </div>
       </div>
-      <button class="btn btn-primary" (click)="uploadFile()">Upload file</button>
+      <button class="btn btn-primary" (click)="uploadFile()">
+        Upload file
+      </button>
     </div>
   </div>
 </div>
-

@@ -1,17 +1,17 @@
 @if (file) {
-  <td><img src="/svg/code-file.svg" alt="File" /> {{ file.filename }}</td>
-  <td>{{ file.name }}</td>
-  <td>{{ file.description }}</td>
-  <td>
-    @if (file.isValid) {
-      <span class="badge text-bg-success">Valid</span>
-    } @else {
-      <span class="badge text-bg-danger">Not valid</span>
-    }
-  </td>
-  <td>
-    <a href="javascript:void(0)" (click)="deleteFile(file)" ngbTooltip="Delete">
-      <img src="/svg/icon-remove.svg" alt="Delete">
-    </a>
-  </td>
+<td><img src="/svg/code-file.svg" alt="File" /> {{ file.filename }}</td>
+<td>{{ file.name }}</td>
+<td>{{ file.description }}</td>
+<td>
+  @if (file.isValid) {
+  <span class="badge text-bg-success">Valid</span>
+  } @else {
+  <span class="badge text-bg-danger">Not valid</span>
+  }
+</td>
+<td>
+  <a href="javascript:void(0)" (click)="deleteFile(file)" ngbTooltip="Delete">
+    <img src="/svg/icon-remove.svg" alt="Delete" />
+  </a>
+</td>
 }
