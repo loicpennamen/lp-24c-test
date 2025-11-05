@@ -9,6 +9,7 @@
 </div>
 <div class="modal-body">
   <form [formGroup]="form" (ngSubmit)="submit()">
+
     <!--File-->
     <div class="mb-3">
       <input
@@ -17,15 +18,20 @@
         class="form-control"
         accept=".json"
         (change)="onFileChange($event)"
+        required
       />
-      @if (invalidJsonMessage()) {
-        <div class="text-warning small mt-0.5">{{ invalidJsonMessage() }}</div>
-      }
-      <app-error-message [form]="form.get('title')">
+      <div class="text-danger small mt-0.5">
         @if (form.get('file')?.invalid && form.get('file')?.touched) {
-          <div class="text-danger small">File is required.</div>
+          @if (form.get('file')?.errors?.['required']) {
+            Please select a file.
+          }
+          @if (form.get('file')?.errors?.['jsonFileExtensionValidator']) {
+            The extension of the file should be .json.
+          }
+        } @else if (invalidJsonMessage()) {
+          {{ invalidJsonMessage() }}
         }
-      </app-error-message>
+      </div>
     </div>
 
     <!--Title-->
@@ -38,8 +44,14 @@
         placeholder="Enter title"
       />
       <app-error-message [form]="form.get('title')">
-        @if (form.get('description')?.errors?.['required']) {
+        @if (form.get('title')?.errors?.['required']) {
           <span>Title is required.</span>
+        } @else if (form.get('title')?.errors?.['mustContain']) {
+          <span>This field must contain the string: «{{ form.get('title')?.errors?.['mustContain'] }}».</span>
+        } @else if (form.get('title')?.errors?.['pattern']) {
+          <span>This field can contain only english characters, number, dashes and lines.</span>
+        } @else if (form.get('title')?.errors?.['maxlength']) {
+          <span>This field is limited to {{ form.get('title')?.errors?.['maxlength'].requiredLength }} characters. </span>
         } @else {
           <span>This field is invalid</span>
         }
@@ -59,7 +71,7 @@
         @if (form.get('description')?.errors?.['required']) {
           <span>Description is required.</span>
         } @else if (form.get('description')?.errors?.['maxlength']) {
-          <span>This field is limited to 500 characters. </span>
+          <span>This field is limited to {{ form.get('description')?.errors?.['maxlength'].requiredLength }} characters. </span>
         } @else {
           <span>This field is invalid</span>
         }
