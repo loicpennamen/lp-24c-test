@@ -1,0 +1,100 @@
+<div class="modal-header">
+  <h4 class="modal-title">Select a file</h4>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  ></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <!--File-->
+    <div class="mb-3">
+      <input
+        id="file"
+        type="file"
+        class="form-control"
+        accept=".json"
+        (change)="onFileChange($event)"
+        required
+      />
+      <div class="text-danger small mt-0.5">
+        @if (form.get('file')?.invalid && form.get('file')?.touched) { @if
+        (form.get('file')?.errors?.['required']) { Please select a file. } @if
+        (form.get('file')?.errors?.['jsonFileExtensionValidator']) { The
+        extension of the file should be .json. } } @else if
+        (invalidJsonMessage()) { {{ invalidJsonMessage() }} }
+      </div>
+    </div>
+
+    <!--Title-->
+    <div class="mb-3">
+      <input
+        id="title"
+        type="text"
+        class="form-control"
+        formControlName="title"
+        placeholder="Enter title"
+      />
+      <app-error-message [form]="form.get('title')">
+        @if (form.get('title')?.errors?.['required']) {
+        <span>Title is required.</span>
+        } @else if (form.get('title')?.errors?.['mustContain']) {
+        <span
+          >This field must contain the string: «{{
+          form.get('title')?.errors?.['mustContain'] }}».</span
+        >
+        } @else if (form.get('title')?.errors?.['pattern']) {
+        <span
+          >This field can contain only english characters, number, dashes and
+          lines.</span
+        >
+        } @else if (form.get('title')?.errors?.['maxlength']) {
+        <span
+          >This field is limited to {{
+          form.get('title')?.errors?.['maxlength'].requiredLength }} characters.
+        </span>
+        } @else {
+        <span>This field is invalid</span>
+        }
+      </app-error-message>
+    </div>
+
+    <!-- Description -->
+    <div class="mb-3">
+      <textarea
+        id="description"
+        rows="1"
+        class="form-control"
+        formControlName="description"
+        placeholder="Enter description"
+      ></textarea>
+      <app-error-message [form]="form.get('description')">
+        @if (form.get('description')?.errors?.['required']) {
+        <span>Description is required.</span>
+        } @else if (form.get('description')?.errors?.['maxlength']) {
+        <span
+          >This field is limited to {{
+          form.get('description')?.errors?.['maxlength'].requiredLength }}
+          characters.
+        </span>
+        } @else {
+        <span>This field is invalid</span>
+        }
+      </app-error-message>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-outline-secondary"
+    (click)="activeModal.close('Close click')"
+  >
+    Cancel
+  </button>
+  <button type="button" class="btn btn-primary" (click)="submit()">
+    Upload
+  </button>
+</div>

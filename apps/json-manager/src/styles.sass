@@ -1,0 +1,52 @@
+
+// The following import would be optimised in a real production case
+@use "bootstrap/scss/bootstrap.scss"
+
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap')
+
+// Global vars - Using CSS vars allows dynamic design changes
+:root
+  --brand-primary: #007bff
+  --brand-light-gray: #F8F8F8
+  --card-w-md: 640px
+
+// General design
+body
+  font-family: "Inter", sans-serif
+
+h1
+  font-size: 28px
+
+
+// Helper classes
+.text-lg
+  font-size: 20px
+  font-weight: 600
+
+.bg-brand-primary
+  background-color: var(--brand-primary)
+
+// Bootstrap custom
+:root
+  // Bootstrap vars
+  --bs-body-color: #3d3d3d
+  --bs-success-rgb: 40,167,69
+  --bs-danger-rgb: 206, 27, 27
+  --bs-border-color: #DEE2E6
+
+.table-warning
+  --bs-table-bg: #FFFAFA
+  --bs-table-border-color: var(--bs-border-color)
+
+.table > :not(caption) > * > *
+  padding: 0.8rem 0.8rem
+
+.card-body
+  --bs-card-color: #3d3d3d
+
+.btn
+  --bs-btn-padding-x: 16px
+  --bs-btn-padding-y: 9px
+
+
